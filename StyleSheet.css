@@ -1,0 +1,30 @@
+﻿body { 
+    padding-top: 50px; 
+
+}
+
+
+
+/*.video-player-container{
+    width: 80%;
+}*/
+
+.video-player-controls{
+    background-color: #888;
+}
+
+video{
+    max-width:100%;
+}
+
+.container .jumbotron{
+    border-radius:0;
+}
+
+.navbar{
+   background-color:brown;
+}
+
+#nav-items{
+    float:right;
+}
