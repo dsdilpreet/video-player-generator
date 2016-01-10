@@ -1,0 +1,54 @@
+﻿<form >
+
+    <!-- repeat checkbox -->
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+        <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" ng-model="control.control.isRepeat">
+        <span class="mdl-checkbox__label">Repeat</span>
+    </label>
+
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+        <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" ng-model="control.control.displayCurrentTime">
+        <span class="mdl-checkbox__label">Current Time</span>
+    </label>
+
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-3">
+        <input type="checkbox" id="checkbox-3" class="mdl-checkbox__input" ng-model="control.control.duration">
+        <span class="mdl-checkbox__label">Duration</span>
+    </label>
+
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-4">
+        <input type="checkbox" id="checkbox-4" class="mdl-checkbox__input" ng-model="control.control.displayProgress">
+        <span class="mdl-checkbox__label">Time Seek Bar</span>
+    </label>
+
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-5">
+        <input type="checkbox" id="checkbox-5" class="mdl-checkbox__input" ng-model="control.control.allowDownload" ng-checked="width()">
+        <span class="mdl-checkbox__label">Download</span>
+    </label>
+
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-6">
+        <input type="checkbox" id="checkbox-6" class="mdl-checkbox__input" ng-model="control.control.allowSpeedControl" ng-checked="width()">
+        <span class="mdl-checkbox__label">Speed Control</span>
+    </label>
+
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-7">
+        <input type="checkbox" id="checkbox-7" class="mdl-checkbox__input" ng-model="control.control.allowVolumeControl">
+        <span class="mdl-checkbox__label">Volume Control</span>
+    </label>
+
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-8">
+        <input type="checkbox" id="checkbox-8" class="mdl-checkbox__input" ng-model="control.control.loop" ng-checked="width()">
+        <span class="mdl-checkbox__label">Auto Repeat</span>
+    </label>
+
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-9">
+        <input type="checkbox" id="checkbox-9" class="mdl-checkbox__input" ng-model="control.control.quality" ng-checked="width()">
+        <span class="mdl-checkbox__label">Change Quality</span>
+    </label>
+
+    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-10">
+        <input type="checkbox" id="checkbox-10" class="mdl-checkbox__input" ng-model="control.control.allowFullScreen">
+        <span class="mdl-checkbox__label">Full Screen</span>
+    </label>
+
+</form>

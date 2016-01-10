@@ -1,0 +1,102 @@
+﻿<!-- Video Player Controls -->
+<div class="mdl-cell mdl-cell--12-col no-margin" ng-controller="VideoController as video">
+    <div class="preview-controls" id="controls" ng-controller="ControlController as control">
+        <!-- Seek Video Time Control  -->
+        <div class="time-bar">
+            <input id="timeseek" class="time-meter" type="range" value="{{data.seekbarThumbPosition}}" ng-model="data.seekbarThumbPosition"
+                   ng-change="seekVideo()" ng-show="control.control.displayProgress" />
+        </div>
+
+        <div class="control-bar">
+            <!-- play / pause button -->
+            <div id="play/pause" class="preview-controls-main control" ng-click="playPause()">
+                <i class="material-icons vid-icon">play_circle_outline</i>
+            </div>
+
+            <!-- repeat button -->
+            <div id="replay" ng-click="replay()" class="preview-controls-main control" ng-show="control.control.isRepeat">
+                <i class="material-icons vid-icon">replay</i>
+            </div>
+
+            <!-- Current Time Display  -->
+            <div id="current-time" class="preview-controls-main time"
+                 ng-show="control.control.displayCurrentTime" ng-model="displayCurrentTime">
+                {{displayCurrentTime | time}}
+            </div>
+
+            <span class="preview-controls-main separator" ng-show="control.control.displayCurrentTime && control.control.duration">
+                /
+            </span>
+
+            <!-- Display Duration -->
+            <div id="duration-time" class="preview-controls-main time" ng-show="control.control.duration" ng-model="duration">
+                {{duration | time}}
+            </div>
+
+            <div class="right-side-controls">
+
+                <!-- More Options button -->
+                <div id="more-options-btn" class="preview-controls-main"
+                     ng-show="control.control.allowDownload || control.control.allowSpeedControl ||
+                                                    control.control.loop || control.control.quality">
+
+                    <i class="material-icons vid-icon control">more_horiz</i>
+
+
+                    <section id="more-options">
+                        <!-- Allow Download Control  -->
+                        <ul class="more-options-ul" id="more-options-ul">
+                            <li class="control preview-controls-optional" ng-if="control.control.allowDownload">
+                                <a id="download-btn" href="{{videoSource}}" ng-click="download()" class="preview-controls-optional">
+                                    <i class="material-icons vid-icon">file_download</i>
+                                </a>
+                            </li>
+
+                            <!-- Playback Speed  -->
+                            <li id="playback-speed-div" class="preview-controls-optional control" ng-if="control.control.allowSpeedControl">
+                                <i class="material-icons vid-icon">slow_motion_video</i>
+                                <ul id="playback-speed" class="preview-controls-sub-optional">
+                                    <li><a href="#" ng-click="playbackSpeed(2)">2x</a></li>
+                                    <li><a href="#" ng-click="playbackSpeed(1.5)">1.5x</a></li>
+                                    <li><a href="#" ng-click="playbackSpeed(1)">1x</a></li>
+                                    <li><a href="#" ng-click="playbackSpeed(0.5)">0.5x</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Auto Repeat Control -->
+                            <li id="repeat-btn" ng-click="loop()" class="preview-controls-optional control" ng-if="control.control.loop"
+                                 title="Click to turn auto repeat on">
+                                <i class="material-icons vid-icon">repeat</i>
+                            </li>
+
+                            <!-- Video Quality control -->
+                            <li id="quality-btn" class="preview-controls-optional control" ng-if="control.control.quality">
+                                <i class="material-icons vid-icon">high_quality</i>
+                                <ul id="quality-select" class="preview-controls-sub-optional">
+                                    <li><a href="#" class="control" ng-click="changeQuality('low')">SD</a></li>
+                                    <li><a href="#" class="control" ng-click="changeQuality('high')">HD</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- Change Volume Control -->
+                <div class="volume-btn preview-controls-main control" id="mute/unmute" ng-click="muteControl()" ng-show="control.control.allowVolumeControl">
+                    <i class="material-icons vid-icon">volume_up</i>
+                </div>
+
+                <div id="volume-bar-holder" ng-show="control.control.allowVolumeControl">
+                    <input id="volume-bar" type="range" value="0.5" min="0" max="1" step="0.1"
+                           ng-show="control.control.allowVolumeControl" ng-model="initialVolume" ng-change="changeVolume()" />
+                </div>
+
+                <!-- Full Screen Control -->
+                <div id="full-screen" class="preview-controls-main control" ng-click="toggleFullScreen()" ng-show="control.control.allowFullScreen">
+                    <i class="material-icons vid-icon" id="full-screen-icon">fullscreen</i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

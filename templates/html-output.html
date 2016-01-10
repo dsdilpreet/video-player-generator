@@ -1,0 +1,159 @@
+﻿<pre>
+<code ng-controller="ControlController as control">
+<span class="format-output-html">
+&lt;!Doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Your Website Title</title>
+    <!-- style sheets material design icons plus custom -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    &lt;link href="video-player.css" rel="stylesheet" /&gt;
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+&lt;/head&gt;
+</span>
+&lt;body&gt;
+    &lt;div id="video-wrapper"&gt;
+        &lt;video id="avideo"&gt;
+            &lt;source id="low" src="" type="" /&gt;
+            &lt;source id="high" src="" type="" /&gt;
+        &lt;/video&gt;
+    <!-- Video Player Controls -->
+        &lt;div class="preview-controls" id="controls"&gt;
+        <span ng-show="control.control.displayProgress" class="format-output-html">
+            <!-- Seek Video Time Control  -->
+            <div class="time-bar">
+            <input id="time-seek" class="time-meter" type="range" min="0" max="100" value="0" />
+            </div>
+        </span>
+                                        
+        <span>
+            &lt;div class="control-bar"&gt;
+        </span>
+            <span class="format-output-html">
+                <!-- play / pause button -->
+                <div id="play/pause" class="preview-controls-main control">
+                    <i class="material-icons vid-icon">play_circle_outline</i>
+                </div>
+            </span>
+            <span ng-show="control.control.isRepeat" class="format-output-html">
+                <!-- repeat button -->
+                <div id="replay" class="preview-controls-main control">
+                    <i class="material-icons vid-icon">replay</i>
+                </div>
+            </span>
+            <span ng-show="control.control.displayCurrentTime" class="format-output-html">
+                <!-- Current Time Display  -->
+                <div id="current-time" class="preview-controls-main time">
+                    0:00
+                </div>
+            </span>
+            <span ng-show="control.control.displayCurrentTime && control.control.duration" class="format-output-html">
+                <span class="preview-controls-main separator">
+                    /
+                </span>
+            </span>
+            <span ng-show="control.control.duration" class="format-output-html">
+                <!--display duration-->
+                <div id="duration-time" class="preview-controls-main time duration-time">
+                    0:00
+                </div>
+            </span>
+            <span ng-if="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || 
+                  control.control.quality || control.control.allowVolumeControl || control.control.allowFullScreen">
+                &lt;div class="right-side-controls"&gt;
+            </span>
+                <span ng-show="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || control.control.quality">
+                    &lt;div id="more-options-btn" class="preview-controls-main control"&gt;
+                </span>
+                    <span class="format-output-html" ng-show="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || control.control.quality">
+                        <i class="material-icons vid-icon">more_horiz</i>
+                    </span>
+                    <span ng-show="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || control.control.quality"> 
+                        &lt;section id="more-options"&gt; 
+                    </span>
+                        <span class="format-output-html" ng-show="control.control.allowDownload">
+                            <!-- Allow Download Control  -->
+                            <div class="control"> 
+                                <a id="download-btn">
+                                <i class="material-icons vid-icon">file_download</i>
+                                </a>
+                            </div>
+                        </span>
+                        <span class="format-output-html" ng-show="control.control.allowSpeedControl">
+                            <!-- Playback Speed  -->
+                            <div id="playback-speed-div" class="preview-controls-optional control">
+                                <i class="material-icons vid-icon">slow_motion_video</i>
+                                <ul id="playback-speed" class="preview-controls-sub-optional">
+                                    <li><a href="#" id="speed2x">2x</a></li>
+                                    <li><a href="#" id="speed1-5x">1.5x</a></li>
+                                    <li><a href="#" id="speed1x">1x</a></li>
+                                    <li><a href="#" id="speed0-5x">0.5x</a></li>
+                                </ul>
+                            </div>
+                        </span>
+                        <span class="format-output-html" ng-show="control.control.loop">
+                            <!-- Auto Repeat Control -->
+                            <div id="repeat-btn" class="preview-controls-optional control" title="Click to turn auto repeat on">
+                                <i class="material-icons vid-icon">repeat</i>
+                            </div>
+                        </span>
+                        <span class="format-output-html" ng-show="control.control.quality">
+                            <!-- Video Quality control -->
+                            <div id="quality-btn" class="preview-controls-optional control">
+                                <i class="material-icons vid-icon">high_quality</i>
+                                <ul id="quality-select" class="preview-controls-sub-optional">
+                                    <li><a id="sd" href="#" class="control">SD</a></li>
+                                    <li><a id="hd" href="#" class="control">HD</a></li>
+                                </ul>
+                            </div>
+                        </span>
+                    <span ng-show="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || control.control.quality">
+                        &lt;/section&gt;&lt;!--end of more options section--&gt;
+                    </span>
+                <span ng-show="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || control.control.quality">
+                    &lt;/div&gt;&lt;!--end of more options button--&gt;
+                </span>
+                <span ng-show="control.control.allowVolumeControl" class="format-output-html">
+                    <!-- mute-unmute Control -->
+                    <div class="volume-btn preview-controls-main control" id="mute/unmute">
+                        <i class="material-icons vid-icon">volume_up</i>
+                    </div>
+                </span>
+                <span ng-show="control.control.allowVolumeControl" class="format-output-html">
+                    <!--change volume-->
+                    <div id="volume-bar-holder" class="control">
+                        <input id="volume-bar" type="range" value="0.5" min="0" max="1" step="0.1" />
+                    </div>
+                </span>
+                <span ng-show="control.control.allowFullScreen" class="format-output-html">
+                    <!-- Full Screen Control -->
+                    <div id="full-screen" class="preview-controls-main control">
+                        <i class="material-icons vid-icon">fullscreen</i>
+                    </div>
+                </span>
+            <span ng-if="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || 
+                  control.control.quality || control.control.allowVolumeControl || control.control.allowFullScreen">
+                &lt;/div&gt;&lt;!--end of right side controls div--&gt;
+            </span>
+        <span>
+            &lt;/div&gt;&lt;!--end of control bar div--&gt;
+        </span>
+    <span>
+        &lt;/div&gt;&lt;!--end of preview controls div--&gt;
+    </span>
+<span>
+    &lt;/div&gt;&lt;!--end of video wrapper--&gt;
+</span>
+<span>
+    &lt;!-- Scripts run after page  --&gt;
+    &lt;script src="video-app.js" type="text/javascript"&gt;&lt;/script&gt;
+</span>
+<span>
+&lt;/body&gt;
+</span>
+<span>
+&lt;/html&gt;
+</span>                              
+</code>
+</pre>

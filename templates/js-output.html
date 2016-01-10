@@ -1,0 +1,340 @@
+﻿<pre>
+<code ng-controller="ControlController as control">
+<span>
+window.onload = function() {
+    // Video
+    var oevideo = document.getElementById("avideo");
+    // disabling the default controls
+    oevideo.controls = false;
+    
+    //setting default video source to low and initialize player 
+    var defaultVideoSouce = document.getElementById("low").getAttribute('src');
+    
+    function initializePlayer (){
+        oevideo.setAttribute('src', defaultVideoSouce);
+    }
+    initializePlayer();
+</span>
+<span>
+    var oeplayPauseBtn = document.getElementById("play/pause");
+</span> 
+<span ng-show="control.control.isRepeat">
+    var oereplay = document.getElementById("replay");
+</span>     
+<span ng-show="control.control.allowVolumeControl">
+    var muteBtn = document.getElementById("mute/unmute");
+</span>     
+<span ng-show="control.control.allowFullScreen">
+    var fullScreenBtn = document.getElementById("full-screen");
+</span> 
+<span ng-show="control.control.loop">
+    var repeatBtn = document.getElementById("repeat-btn");
+</span> 
+<span ng-show="control.control.allowDownload">
+    var downloadBtn = document.getElementById("download-btn");
+</span>
+<span ng-show="control.control.quality">
+    var sdBtn = document.getElementById("sd");
+    var hdBtn = document.getElementById("hd");
+</span>
+<span ng-show="control.control.displayCurrentTime">
+    //current time holder
+    var currentTimeView = document.getElementById("current-time");
+</span>
+<span ng-show="control.control.duration">
+    //duration time holder
+    var durationTimeView = document.getElementById("duration-time");
+</span>
+<span ng-show="control.control.displayProgress">
+    // time Slider
+    var oeseekBar = document.getElementById("time-seek");
+</span>
+<span ng-show="control.control.allowVolumeControl">
+    // volume Slider
+    var volumeBar = document.getElementById("volume-bar");
+</span>
+<span>
+    <span ng-show="control.control.allowVolumeControl">
+    // current volume
+    var currentVolume = volumeBar.value;
+    </span>
+    // video wrapper
+    var videoWrapper = document.getElementById("video-wrapper");
+    //controls
+    var controls = document.getElementById("controls");
+</span>
+<span ng-show="control.control.allowDownload"> 
+    //high and low quality sources
+    var highQualitySource = document.getElementById("high").getAttribute('src');
+    var lowQualitySource = document.getElementById("low").getAttribute('src');
+</span>
+<span>
+    //functionality
+    // hover effect on video to bring up the controls
+    videoWrapper.addEventListener('mouseover', function(){
+       controls.style.display = 'block';
+    });
+    
+    videoWrapper.addEventListener('mouseout', function(){
+        //controls.style.display = 'none';
+    });
+    
+    //play-pause 
+    function playPause(){
+        if (oevideo.paused == true) {
+            oevideo.play();
+            oeplayPauseBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;pause&lt;/i&gt;';
+        } else {
+            oevideo.pause();
+            oeplayPauseBtn.innerHTML = ' &lt;i class="material-icons vid-icon"&gt;play_circle_outline&lt;/i&gt;';
+        }
+    }
+    
+    function spaceKeyFunction(e){
+        if (e.keyCode == "32") {
+        playPause();
+        }
+    }
+    
+    oeplayPauseBtn.addEventListener('click', playPause);
+    document.addEventListener('keydown', spaceKeyFunction, false);
+    oevideo.addEventListener('click', playPause);
+</span>
+<span ng-show="control.control.isRepeat">
+    //replay
+    oereplay.addEventListener('click', function(){
+        oevideo.currentTime = 0;
+        oevideo.play();
+    });
+</span>
+<span ng-show="control.control.displayCurrentTime">
+    //current time
+    oevideo.addEventListener('timeupdate', function(){
+        var curMins = Math.floor(oevideo.currentTime / 60);
+        var curSecs = Math.floor(oevideo.currentTime - curMins * 60);
+        if(curSecs < 10){ curSecs = "0"+curSecs; }
+	    if(curMins < 10){ curMins = "0"+curMins; }
+        currentTimeView.innerHTML = curMins + ":" + curSecs;
+    });
+</span>
+<span ng-show="control.control.duration">
+    //duration  
+    oevideo.addEventListener('timeupdate', function(){
+        var durMins = Math.floor(oevideo.duration / 60);
+        var durSecs = Math.floor(oevideo.duration - durMins * 60);
+        if(durSecs < 10){ durSecs = "0"+durSecs; }
+        if(durMins < 10){ durMins = "0"+durMins; }
+        durationTimeView.innerHTML = durMins + ":" + durSecs;
+    });
+</span>
+<span ng-show="control.control.displayProgress">
+    // update seek bar for time as time updates  
+    oevideo.addEventListener('timeupdate', function(){
+        var newTime = oevideo.currentTime * (100 / oevideo.duration);
+        oeseekBar.value = newTime; 
+    });  
+    // update current time if seek bar for time changes
+    oeseekBar.addEventListener('change', function(){
+        var seekTo = oevideo.duration * (oeseekBar.value / 100);
+       oevideo.currentTime = seekTo; 
+    });
+</span>
+<span ng-show="control.control.allowVolumeControl">
+    // mute-unmute
+    muteBtn.addEventListener('click', function(){
+        if (oevideo.muted) {
+            oevideo.muted = false;
+            muteBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;volume_up&lt;/i&gt;';
+            volumeBar.value = currentVolume;
+        } else {
+            oevideo.muted = true;
+            muteBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;volume_mute&lt;/i&gt;';
+            volumeBar.value = 0;
+        }
+    });
+    // change volume
+    volumeBar.addEventListener('change', function(){
+        oevideo.volume = volumeBar.value;
+    });
+</span>
+<span ng-show="control.control.allowFullScreen">
+    // full screen
+    function toggleFullScreen(){
+        //if document is not in full screen
+        if (!document.fullscreenElement && 
+          !document.mozFullScreenElement && 
+          !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+        if (videoWrapper.requestFullscreen) {
+          videoWrapper.requestFullscreen();
+          fullScreenBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;fullscreen_exit&lt;/i&gt;';
+        } else if (videoWrapper.msRequestFullscreen) {
+          videoWrapper.msRequestFullscreen();
+          fullScreenBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;fullscreen_exit&lt;/i&gt;';
+        } else if (videoWrapper.mozRequestFullScreen) {
+          videoWrapper.mozRequestFullScreen();
+          fullScreenBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;fullscreen_exit&lt;/i&gt;';
+        } else if (videoWrapper.webkitRequestFullscreen) {
+          videoWrapper.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+          fullScreenBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;fullscreen_exit&lt;/i&gt;';
+        }
+    } else {
+          //if document is in full screen
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+          fullScreenBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;fullscreen&lt;/i&gt;';
+        } else if (document.msExitFullscreen) {
+          document.msExitFullscreen();
+          fullScreenBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;fullscreen&lt;/i&gt;';
+        } else if (document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+          fullScreenBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;fullscreen&lt;/i&gt;';
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+          fullScreenBtn.innerHTML = '&lt;i class="material-icons vid-icon"&gt;fullscreen&lt;/i&gt;';
+        }
+      }
+    }
+    //event handler for enter or return key 
+    function enterKeyFunction(e){
+        if (e.keyCode == "13") {
+            toggleFullScreen();
+        }
+    }
+    
+    fullScreenBtn.addEventListener('click', toggleFullScreen); 
+    // toggle full screen when enter or return key is pressed 
+    document.addEventListener('keydown', enterKeyFunction, false);
+</span>
+<span ng-show="control.control.loop">
+    //make video loop
+    repeatBtn.addEventListener('click', function(){
+        if(!oevideo.loop){
+            oevideo.loop = true;
+            repeatBtn.setAttribute('title', 'Click to turn auto repeat off');
+        } else {
+            oevideo.loop = false;
+            repeatBtn.setAttribute('title', 'Click to turn auto repeat on');
+        }
+    });
+</span>
+<span ng-show="control.control.allowDownload">
+    //download
+    downloadBtn.addEventListener('click', function(){
+            if(defaultVideoSouce == highQualitySource){
+            downloadBtn.setAttribute('href', highQualitySource);
+            downloadBtn.setAttribute('download', highQualitySource);
+        } else{
+            downloadBtn.setAttribute('href', lowQualitySource);
+            downloadBtn.setAttribute('download', lowQualitySource);
+        }
+    });
+</span>
+<span ng-show="control.control.quality">
+    //change quality
+    sdBtn.addEventListener('click', function(){
+        if(oevideo.paused){
+            var lowSource = document.getElementById("low").getAttribute('src');
+            if (defaultVideoSouce == lowSource){
+                //keep playing same video
+            } else{
+                var currentVideoTime = oevideo.currentTime;
+                oevideo.src = lowSource;
+                defaultVideoSouce = lowSource;
+                oevideo.currentTime = currentVideoTime;
+            }   
+            oevideo.pause();
+        } else {
+            var lowSource = document.getElementById("low").getAttribute('src');
+            if (defaultVideoSouce == lowSource){
+                //keep playing same video
+            } else{
+                var currentVideoTime = oevideo.currentTime;
+                oevideo.src = lowSource;
+                defaultVideoSouce = lowSource;
+                oevideo.currentTime = currentVideoTime;
+            }
+            oevideo.play();
+        }
+        
+    });
+    
+    hdBtn.addEventListener('click', function(){
+        if(oevideo.paused){
+            var highSource = document.getElementById("high").getAttribute('src');
+            if (defaultVideoSouce == highSource){
+                //keep playing same video
+            } else{
+                var currentVideoTime = oevideo.currentTime;
+                oevideo.src = highSource;
+                defaultVideoSouce = highSource;
+                oevideo.currentTime = currentVideoTime;
+            }   
+            oevideo.pause();
+        } else {
+            var highSource = document.getElementById("high").getAttribute('src');
+            if (defaultVideoSouce == highSource){
+                //keep playing same video
+            } else{
+                var currentVideoTime = oevideo.currentTime;
+                oevideo.src = highSource;
+                defaultVideoSouce = highSource;
+                oevideo.currentTime = currentVideoTime;
+            }
+            oevideo.play();
+        }
+        
+    });
+</span>
+<span ng-show="control.control.allowSpeedControl">
+    // changing playback speed
+    var oeSpeed2x = document.getElementById("speed2x");
+    var oeSpeed1_5x = document.getElementById("speed1-5x");
+    var oeSpeed1x = document.getElementById("speed1x");
+    var oeSpeed0_5x = document.getElementById("speed0-5x");
+    
+    oeSpeed2x.addEventListener('click', function(){
+        oevideo.playbackRate = 2 * oevideo.playbackRate;
+    });
+    oeSpeed1_5x.addEventListener('click', function(){
+        oevideo.playbackRate = 1.5 * oevideo.playbackRate;
+    });
+    oeSpeed1x.addEventListener('click', function(){
+        oevideo.playbackRate = 1 * oevideo.playbackRate;
+    });
+    oeSpeed0_5x.addEventListener('click', function(){
+        oevideo.playbackRate = 0.5 * oevideo.playbackRate;
+    });
+</span>
+<span ng-show="control.control.allowDownload || control.control.allowSpeedControl || control.control.loop || control.control.quality">
+    var section = document.getElementById("more-options");
+    var elementCount = section.children.length;
+    console.log(elementCount);
+    if(elementCount == 4){
+        section.style.top = '-160px';
+    } else if(elementCount == 3){
+        section.style.top = '-120px';
+    } else if(elementCount == 2){
+        section.style.top = '-80px';
+    } else{
+        section.style.top = '-40px';
+    }
+
+</span>
+<span>
+    //hide controls after 3 seconds if mouse is not moving
+    function inactivity(){
+        setTimeout(function(){
+            controls.style.visibility = 'hidden'; 
+         }, 3000);
+    }
+    inactivity();
+    videoWrapper.addEventListener('mousemove', function(){
+        controls.style.visibility = 'visible';
+    inactivity(); 
+    });
+</span>
+<span>
+}
+</span>
+</code>
+</pre>

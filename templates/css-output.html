@@ -1,0 +1,381 @@
+﻿<pre>
+<code ng-controller="ControlController as control">
+/*general*/
+body{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+#video-wrapper{
+    max-width: 100%;
+    margin: 0 auto;
+    width: 640px;
+    height: auto;
+    position: relative;
+}
+#video-wrapper:-webkit-full-screen{
+    width: 100%;
+}
+
+.no-margin{
+    margin:0;
+}
+#avideo{
+    max-width:100%;
+    width: 100%;
+    margin:auto;
+}
+#avideo::-webkit-media-controls-enclosure {
+  display:none !important;
+}
+a{
+    text-decoration: none;
+}
+a:visited{
+    color:inherit;
+}
+.control{
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    cursor: pointer;
+}
+/***********************
+    video player
+************************/
+.preview-controls{
+    position: absolute;
+    z-index: 2147483647;
+    bottom: 0;
+    left:0;
+    right: 0;
+    height: 60px;
+    width: 100%;   
+    display: none;
+}
+@-moz-document url-prefix() {
+    .time-meter{
+        padding-left: 0;
+        margin-left: 0;
+    }
+    .preview-controls{
+        top: -moz-calc(100% - 62px);
+    }
+}
+
+<span ng-show="control.control.displayProgress">
+.time-bar{
+    display:block;
+    padding: 0 1%;
+    height: 20px;
+}
+
+.time-meter{
+    width: 100%;
+}
+</span>
+.control-bar{
+    height: 40px;
+}
+
+.preview-controls-main{
+    height: 40px;
+    display:inline-block;
+    vertical-align: middle;
+    padding-left: 10px;
+    font-size: 18px;
+}
+.preview-controls li{
+    list-style:none;
+    margin: 0;
+    padding: 0;
+}
+.vid-icon{
+    font-size: 32px;
+    height: 32px;
+    text-align:center;
+    vertical-align:middle;
+}
+
+<span ng-show="control.control.displayCurrentTime || control.control.duration">
+.time{
+    padding-top: 9px;
+    vertical-align: middle;
+}
+</span>
+<span ng-show="control.control.displayCurrentTime && control.control.duration">
+.separator{
+    margin-bottom: -7px;
+    padding:0;
+    font-weight: 700;
+}
+</span>
+<span ng-show="control.control.duration">
+.duration-time{
+    padding-left: 0;
+}
+</span>
+<span ng-if="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || 
+                  control.control.quality || control.control.allowVolumeControl || control.control.allowFullScreen">
+.right-side-controls{
+    margin-top: 5px;
+    float:right;
+}
+.right-side-controls div{
+    position: relative;
+    display: inline-block;
+}
+</span>
+<span ng-show="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || control.control.quality">
+#more-options-btn{
+    position: relative;
+}
+#more-options-btn:hover #more-options{
+    display: block;
+}
+/* more options button on control bar*/
+#more-options{
+    display: none;
+    width:48px;
+    left: -1px;
+    position: absolute;
+    z-index: 2147483647;
+    padding-bottom: 10px;
+}
+#more-options div{
+    padding: 4px 8px;
+}
+.preview-controls-optional{
+    position: relative;
+}
+.preview-controls-sub-optional{
+    position: absolute;
+    left: -48px;
+    width: 48px;
+    padding-left:0;
+}
+.preview-controls-sub-optional li{
+    margin:auto;
+    text-align: center;
+    padding: 7% 0;
+}
+</span>
+<span ng-show="control.control.allowSpeedControl">
+#playback-speed-div:hover #playback-speed{
+    display: block;
+}
+#playback-speed{
+    display: none;
+    top: -100px;
+}
+</span>
+<span ng-show="control.control.quality">
+#quality-btn:hover #quality-select{
+    display: block;
+}
+#quality-select{
+    display: none;
+    top: -40px;
+}
+</span>
+<span ng-show="control.control.allowVolumeControl">
+#volume-bar-holder{
+    width: 70px;
+}
+#volume-bar{
+    width:100%;
+    vertical-align: middle;
+    margin-bottom: 9px;
+}
+</span>
+<span ng-show="control.control.displayProgress || control.control.allowVolumeControl">
+/*sliders for chrome and other webkit browsers*/
+input[type='range']{
+    -webkit-appearance: none;
+    height: 3px;
+    cursor: pointer;  
+}
+input[type='range']:hover{
+    height: 4px;  
+}
+input[type='range']::-webkit-slider-runnable-track{
+    -webkit-appearance: none;
+    height: 3px;
+    cursor: pointer;  
+}
+input[type='range']::-webkit-slider-runnable-track:hover{
+    height: 4px;  
+}
+input[type='range']::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+    margin-top: -4px;
+}
+/*sliders for firefox*/
+input[type='range']::-moz-range-track{
+    height: 3px;
+    cursor: pointer;
+}
+input[type='range']::-moz-range-track:hover{
+    height: 4px;
+}
+input[type='range']::-moz-range-thumb{
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+}
+/*sliders for internet explorer*/
+input[type='range']::-ms-track{
+    height: 3px;
+}
+input[type='range']::-ms-track:hover{
+    height: 4px;
+}
+input[type='range']::-ms-thumb{
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+}
+</span>
+/***********************
+    colors
+************************/
+.preview-controls{
+    background-color: #eeeeee;
+    opacity: 0.7;
+    color: #424242;
+}
+<span ng-show="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || control.control.quality">
+#more-options{
+    background-color: #eeeeee;
+}
+.preview-controls-sub-optional{
+    background-color: #eeeeee;
+}
+</span>
+<span ng-show="control.control.displayProgress || control.control.allowVolumeControl">
+/*colors - sliders for chrome and other webkit browsers*/
+input[type='range']::-webkit-slider-runnable-track{
+    background-color: #444;   
+}
+input[type='range']::-webkit-slider-thumb{
+    background: #CCC;
+}
+/* colors - sliders for firefox*/
+input[type='range']::-moz-range-track{
+    background-color: #444;
+}
+input[type='range']::-moz-range-thumb{
+    background: #CCC;
+}
+/*colors - sliders for internet explorer*/
+input[type='range']::-ms-track{
+    background-color: #444;
+}
+input[type='range']::-ms-thumb{
+    background: #CCC;
+}
+</span>
+/**responsive**/
+/*general*/
+@media (max-width: 570px){
+    .wrapper{
+        width: 100%;
+    }
+    .preview-controls{
+        height: 50px;
+        width: 100%;    
+    }
+    <span ng-show="control.control.displayProgress">
+    .time-bar{
+        margin-top: -4px;
+        height: 10px;
+    }
+    </span>
+    .control-bar{
+        margin-top: 10px;
+    }
+    .preview-controls-main{
+        padding-left: 5px;
+        font-size: 16px;
+    }
+    .vid-icon{
+        font-size: 26px;
+        height: 26px;
+    }
+    <span ng-show="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || 
+                  control.control.quality || control.control.allowVolumeControl || control.control.allowFullScreen">
+    .right-side-controls{
+        margin-top: 5px;
+    }
+    </span>
+    <span ng-show="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || control.control.quality">
+    #more-options{
+        width:36px;
+        padding-bottom: 30px;
+    }
+    #more-options div{
+        padding: 10% 12%;
+    }
+    .preview-controls-sub-optional{
+        left: -36px;
+        width: 36px;
+    }
+    .preview-controls-sub-optional li{
+        text-align: center;
+        padding: 7% 0;
+    }
+    </span>
+    <span ng-show="control.control.speedControl">
+    #playback-speed{
+        top: -80px;
+    }
+    </span>
+    <span ng-show="control.control.quality">
+    #quality-select{
+        top: -32px;
+    }
+    </span>
+    <span ng-show="control.control.displayProgress || control.control.allowVolumeControl">
+    /*sliders for chrome and other webkit browsers*/
+    input[type='range']::-webkit-slider-runnable-track{
+        height: 3px;  
+    }
+    input[type='range']::-webkit-slider-thumb{
+        height: 10px;
+        width: 10px;
+    }
+    /*sliders for firefox*/
+    input[type='range']::-moz-range-thumb{
+        height: 10px;
+        width: 10px;
+    }
+    /*sliders for internet explorer*/
+    input[type='range']::-ms-thumb{
+        height: 10px;
+        width: 10px;
+    }
+    </span>
+}
+@media (max-width: 480px){
+    <span ng-show="control.control.allowVolumeControl">
+    #volume-bar-holder{
+        display:none;
+    }
+    </span>
+    <span ng-show="control.control.displayProgress">
+    .time-bar{
+        display:none;
+    }
+    </span>
+    <span ng-show="control.control.allowDownload || control.control.loop || control.control.allowSpeedControl || control.control.quality">
+    #more-options-btn{
+        display:none;
+    }
+    #more-options{
+        display:none;
+    }
+    </span>
+}
+</code>
+</pre>
