@@ -8,7 +8,6 @@
     $scope.width = function () {
         updateWidth.newWidth();
     }
-
 })
 //controls object for functionality
 var controls = {

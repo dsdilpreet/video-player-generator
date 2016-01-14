@@ -1,3 +1,120 @@
-﻿<div>
-    <h1>This is docs page</h1>
+﻿<div class="docs-main mdl-layout__content" ng-controller="ScrollCtrl">
+    <div class="docs-ribbon"></div>
+    <div class="docs-container mdl-grid">
+        <div class="docs-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+            <section class="docs-contents">
+                <ul class="docs-content-list">
+                    <li><a ng-click="scrollTo('about')">About the web app</a></li>
+                    <li>
+                        <a ng-click="scrollTo('how-to-generate')">How to create your own video player</a>
+                        <ul class="docs-content-sublist">
+                            <li><a ng-click="scrollTo('select-controls')">Select Controls</a></li>
+                            <li><a ng-click="scrollTo('copy-code')">Copy Code</a></li>
+                            <li><a ng-click="scrollTo('add-video-source')">Add Video Source</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a ng-click="scrollTo('other-features')">Other Features</a>
+                        <ul class="docs-content-sublist">
+                            <li><a ng-click="scrollTo('keyboard-features')">Keyboard</a></li>
+                            <li><a ng-click="scrollTo('mouse-features')">Mouse</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <div class="docs-main-content">
+                <section id="about">
+                    <h3>About the application</h3>
+                    <p>
+                        Video Player Generator is a client side application made with Angular JS and Google's material design. It is
+                        developed in HTML, CSS and JavaScript. This application let users develop their own HTML5 video player with custom
+                        controls which look and behave same in all major web browsers. Users can select the controls they want and application
+                        creates dynamic code as per their selection.
+                    </p>
+                </section>
+                <section id="how-to-generate">
+                    <h3>How to create your own video player</h3>
+                    <div>
+                        <div id="select-controls">
+                            <h4>Select the controls you want in your video player</h4>
+                            <img class="select-controls-img" src="img/select-controls.png" />
+                            <p>See the live preview of your video player</p>
+                            <img class="preview-controls-img" src="img/preview-controls.png" />
+                        </div>
+                        <div id="copy-code">
+                            <h4>Copy your code</h4>
+                            <p>HTML is for markup, CSS is for styling and JavaScript is for behaviour</p>
+                            <img src="img/code.png" />
+                        </div>
+                        <div id="add-video-source">
+                            <h4>Add your video's source to video tag in HTML code</h4>
+                            <p>
+                                If you haven't selected quality change control for your video player, you will get following code, type the source
+                                of video in <code class="code-span">src</code> attribute where <code class="code-span">id="low"</code>and keep the <code class="code-span">src</code>
+                                and <code class="code-span">type</code> attribute blank where <code class="code-span">id="high"</code>
+                                enter type of video in <code class="code-span">type</code> attribute. An example is given below:
+                            </p>
+                            <div class="docs-code-output">
+                                <code>
+                                    &lt;video id="avideo"&gt;<br />
+                                    &nbsp;&nbsp;&lt;source id="low" src="yourvideo.mp4" type="video/mp4" /&gt;<br />
+                                    &nbsp;&nbsp;&lt;source id="high" src="" type="" /&gt;<br />
+                                    &lt;/video&gt;
+                                </code>
+                            </div>
+                            <p>
+                                If you did select quality control, then you will have following code, type the name of low quality video in source where
+                                <code class="code-span">id="low"</code> and type the high quality video source where <code class="code-span">id="high"</code>. Example is given below:<br />
+                            </p>
+                            <div class="docs-code-output">
+                                <code>
+                                    &lt;video id="avideo"&gt;<br />
+                                    &nbsp;&nbsp;&lt;source id="low" src="lowQuality.mp4" type="video/mp4" /&gt;<br />
+                                    &nbsp;&nbsp;&lt;source id="high" src="highQuality.mp4" type="video/mp4" /&gt;<br />
+                                    &lt;/video&gt;
+                                </code>
+                            </div>
+                        </div>
+                        <div>
+                            <p>
+                                Don't forget to link your external CSS and JavaScript files to your html page.
+                                <code class="code-span">href</code> and <code class="code-span">src</code> attributes should have same
+                                name as your files.<br />Keep both stylesheets in <code class="code-span">&lt;head&gt;</code> tag of your HTML page<br />
+                                This video player also uses material icons library from google (second style sheet)
+                            </p>
+                            <div class="docs-code-output">
+                                <code>
+                                    &lt;link href="video-player.css" rel="stylesheet" /&gt;<br />
+                                    &lt;link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"&gt;
+                                </code>
+                            </div>
+                            <p>Keep your script file just before the end of <code class="code-span">body</code> tag</p>
+                            <code class="docs-code-output">
+                                &lt;script src="video-app.js" type="text/javascript"&gt;&lt;/script&gt;
+                            </code>
+                        </div>
+                    </div>
+
+                </section>
+                <section id="other-features">
+                    <h3>Other Features</h3>
+                    <div id="keyboard-features">
+                        <h4>Keyboard</h4>
+                        <ul>
+                            <li>Space bar to play/pause the video</li>
+                            <li>Enter Key to enter or exit the full screen</li>
+                        </ul>
+                    </div>
+                    <div id="mouse-features">
+                        <h4>Mouse</h4>
+                        <ul>
+                            <li>Controls hide after three seconds of inactivity both in full screen and normal mode</li>
+                            <li>Controls come back when mouse moves over video</li>
+                            <li>Controls hide when mouse leaves the video in mormal size</li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
 </div>

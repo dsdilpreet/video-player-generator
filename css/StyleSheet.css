@@ -1,6 +1,7 @@
 ﻿/*general*/
 body{
-    font-family:Roboto;
+    font-family: 'Roboto','Helvetica','Arial',sans-serif;
+    background-color: #f8f8f8;
 }
 
 *::selection{
@@ -10,6 +11,21 @@ body{
 .no-margin{
     margin:0;
 }
+
+.bottom{
+    position: static;
+    display:block;
+    width: 100%;
+}
+
+a{
+    cursor: pointer;
+}
+
+.mdl-grid{
+    max-width: 1120px;
+}
+
 
 
 /**********************
@@ -109,6 +125,31 @@ a:visited{
 /***********************
     video player
 ************************/
+
+/*Select Control section*/
+
+#control-selection{
+    position:relative;
+}
+
+.select-control-card{
+    height: 100%;
+    position:absolute;
+    bottom: 0;
+    left: 0;
+    right:0;
+}
+
+@media(max-width: 839px){
+    .select-control-card{
+        position:static;
+        height: auto;
+    }
+
+    #control-selection{
+    position:static;
+}
+}
 
 .preview-controls{
     position: absolute;
@@ -401,14 +442,54 @@ input[type='range']::-ms-thumb{
 
 .code-output{
     height: 400px;
-    overflow-y: scroll;
+    overflow: hidden;
+    float:left;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
-.clipboard-btn{
-    position: static;
-    top: 10px;
-    right: 0;
+.css-output{
+    overflow: hidden;
+    height: 816px;
+    float: right;
+    margin-top: -408px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
+
+.overflow-on{
+    overflow: scroll;
+    height: 370px;
+    width: 95%;
+}
+
+.overflow-on-css{
+    overflow: scroll;
+    height: 800px;
+    width: 90%;
+}
+
+.card-title{
+    background-color: #4DB6AC;
+}
+
+
+@media(max-width: 839px){
+    .css-output{
+        height: 400px;
+        clear: both;
+        margin-top: 8px;
+    }
+
+    .code-output{
+        clear: both;
+        display: block;
+    }
+
+    .overflow-on-css{
+    width: 95%;
+    height: 360px;
+}
+}
+
 
 /****************
     more info starts
@@ -494,4 +575,154 @@ input[type='range']::-ms-thumb{
         clear:both;
     }
 
+}
+
+/********************
+    Docs Page
+**********************/
+
+.docs-ribbon {
+  width: 100%;
+  height: 30vh;
+  background-color: #4DB6AC;
+  flex-shrink: 0;
+}
+
+.docs-main {
+  flex-shrink: 0;
+  width: 100%;
+  margin-bottom: 80px;
+}
+
+.docs-container {
+  max-width: 1600px;
+  width: calc(100% - 16px);
+}
+
+.docs-content {
+  border-radius: 2px;
+  padding: 80px 56px;
+  margin-bottom: 80px;
+  margin: 0 auto;
+  margin-top: -20vh;
+}
+
+.docs-layout.is-small-screen .docs-content {
+  padding: 40px 28px;
+}
+
+
+/*main content starts*/
+
+.docs-contents a{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.docs-content-list{
+    border-left: 3px solid #4DB6AC;
+    list-style:none;
+    padding-left: 20px;
+}
+
+.docs-content-sublist{
+    list-style:none;
+    border-left: 3px solid #4DB6AC;
+    padding-left: 20px;
+}
+
+.docs-content-list a{
+    color: #4DB6AC;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*sections*/
+.docs-main-content h3 {
+  margin-top: 48px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.docs-main-content h4 {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.docs-main-content p{
+    line-height: 24px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #757575 !important
+}
+
+.docs-main-content img{
+    max-width: 100%;
+    margin-bottom: 40px;
+}
+
+.select-controls-img{
+    width: 450px;
+}
+
+.preview-controls-img{
+    width: 760px;
+}
+
+.docs-code-output{
+    background: #f5f2f0;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.code-span{
+    background: #f5f2f0;
+}
+
+@media (max-width:645px) {
+
+    .docs-content {
+        padding: 40px 20px;
+        margin-bottom: 20px;
+    }
+
+}
+
+
+
+/*Custom scrollbars for webkit*/
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 4px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #4DB6AC;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #009688;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #00796B;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border: 0px none #ffffff;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #ccc;
+}
+::-webkit-scrollbar-track:active {
+  background: #ccc;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
 }

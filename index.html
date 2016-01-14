@@ -1,5 +1,5 @@
 ﻿<!Doctype html>
-<html ng-app="video">
+<html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>Generate HTML5 video player</title>
@@ -22,8 +22,7 @@
 </head>
 
 
-<body>
-
+<body ng-app="video">
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header wrapper">
 
         <!-- header starts -->
@@ -35,7 +34,7 @@
                 <div class="mdl-layout-spacer"></div>
                 <!-- Navigation. We hide it in small screens. -->
                 <nav class="mdl-navigation mdl-layout--large-screen-only">
-                    <a class="mdl-navigation__link" href="#/html5-video-player-generator">Generate</a>
+                    <a class="mdl-navigation__link" href="#/">Generate</a>
                     <a class="mdl-navigation__link" href="#/docs">Docs</a>
                     <a class="mdl-navigation__link" href="http://dsdilpreet.github.io/contact.html">Contact</a>
                 </nav>
@@ -44,15 +43,46 @@
         <div class="mdl-layout__drawer">
             <span class="mdl-layout-title">Menu</span>
             <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" href="#/html5-video-player-generator">Generate</a>
+                <a class="mdl-navigation__link" href="#/">Generate</a>
                 <a class="mdl-navigation__link" href="#/docs">Docs</a>
                 <a class="mdl-navigation__link" href="http://dsdilpreet.github.io/contact.html">Contact</a>
             </nav>
         </div>
         <!-- header ends -->
-
-        <main class="mdl-layout__content">
+        <main class="mdl-layout__content"> 
             <div ng-view></div>
+            <div class="bottom">
+                <!-- More Cool Stuff Section -->
+                <div class="mdl-typography--text-center more-stuff mdl-shadow--2dp">
+                    <div class="mdl-cell--12-col more-stuff-info">
+                        More cool stuff @
+                        <a href="http://dsdilpreet.github.io/">dsdilpreet.github.io</a>
+                    </div>
+                </div>
+
+
+                <!-- footer starts -->
+                <footer class="mdl-mini-footer mdl-shadow--3dp">
+                    <div class="mdl-mini-footer__left-section footer-sections footer-sec-1">
+                        <div class="mdl-logo">
+                            Developed by Dilpreet Singh
+                        </div>
+                    </div>
+                    <div class="mdl-cell--middle footer-sections footer-sec-2">
+                        <div style="width: 36px; margin: 0 auto 0; display: block; ">
+                            <a href="/">
+                                <i class="material-icons mdl-logo logo">play_circle_filled</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mdl-mini-footer__right-section footer-sections footer-sec-3">
+                        <a class="mdl-mini-footer__social-btn" href="https://twitter.com/dil_singh"><img src="img/twitter.png" /></a>
+                        <a class="mdl-mini-footer__social-btn" href="http://nz.linkedin.com/in/dsingh94"><img src="img/linkedin.png" /></a>
+                        <a class="mdl-mini-footer__social-btn" href="http://dsdilpreet.github.io/"><img src="img/github.png" /></a>
+                    </div>
+                </footer>
+            </div>
+
         </main>
         <!-- main content ends here -->
     </div>
@@ -72,9 +102,8 @@
         });
 
     </script>
-
+    <script src="js/vendor/material.min.js"></script>
     <!-- Scripts run after page  -->
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
     <script src="js/vendor/angular.min.js"></script>
     <script src="js/vendor/angular-route.min.js"></script>
     <script src="js/app.js" type="text/javascript"></script>

@@ -1,27 +1,28 @@
 ﻿<div class="page-content">
     <!-- content goes here -->
     <!-- banner starts -->
-    <div class="mdl-typography--text-center mdl-shadow--2dp" id="banner">
+    <div class="mdl-typography--text-center mdl-shadow--2dp" id="banner" ng-controller="ScrollCtrl">
         <div class="mdl-cell mdl-cell--12-col no-margin">
             <div class="slogan">video player for your website</div>
             <div class="sub-slogan">Design your fully functional video player with custom controls and styles in just few clicks</div>
             <div class="slogan-btns">
-                <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" ng-click="scrollTo('control-selection')">
                     Generate
                 </a>
-                <a class="mdl-button mdl-js-button mdl-js-ripple-effect">
-                    Watch Video
+                <a class="mdl-button mdl-js-button mdl-js-ripple-effect" href="#/docs">
+                    View Docs
                 </a>
             </div>
         </div>
     </div>
+
     <!-- banner ends -->
     <!--controls and preview sections-->
     <div class="mdl-grid">
 
         <section class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet" id="control-selection">
-            <div class="demo-card-wide mdl-card mdl-shadow--3dp">
-                <div class="mdl-card__title">
+            <div class="demo-card-wide mdl-card mdl-shadow--3dp select-control-card">
+                <div class="mdl-card__title card-title">
                     <h2 class="mdl-card__title-text">Select Controls</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
@@ -35,7 +36,7 @@
 
         <section class="mdl-cell mdl-cell--8-col" id="preview">
             <div class="demo-card-wide mdl-card mdl-shadow--3dp">
-                <div class="mdl-card__title">
+                <div class="mdl-card__title card-title">
                     <h2 class="mdl-card__title-text">Preview based on selected controls</h2>
                 </div>
 
@@ -50,74 +51,77 @@
                 </div>
             </div>
         </section>
-    </div>
+        
 
-    <!-- Output Code based on user's selected preferences -->
-    <div class="mdl-grid">
+        <!-- Output Code based on user's selected preferences -->
 
-        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-            <div class="mdl-tabs__tab-bar">
-                <a href="#html-panel" class="mdl-tabs__tab is-active">HTML</a>
-                <a href="#css-panel" class="mdl-tabs__tab">CSS</a>
-                <a href="#js-panel" class="mdl-tabs__tab">JavaScript</a>
-            </div>
 
-            <div class="mdl-cell--N-col">
-                <!-- HTML Output -->
-                <div class="mdl-tabs__panel is-active code-output" id="html-panel">
-                    <!--custom directive for html output code-->
+
+        <!-- HTML Section Starts Here -->
+        <section class="mdl-cell mdl-cell--8-col code-output">
+            <section class="demo-card-wide mdl-card mdl-shadow--3dp">
+                <section class="mdl-card__title card-title">
+                    <h2 class="mdl-card__title-text">HTML</h2>
+                </section>
+                <section class="mdl-card__supporting-text overflow-on">
                     <html-output id="html-output"></html-output>
-                    <button class="btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#html-output">Copy HTML to clipboard</button>
-                </div>
+                </section>
+                <section class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <section class="mdl-card__menu">
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn" data-clipboard-action="copy" data-clipboard-target="#html-output">
+                                <i class="material-icons">content_copy</i>
+                            </button>
+                            <span class="mdl-tooltip" for="html-tooltip">Copy HTML</span>
+                        </section>
+                    </button>
+                </section>
+            </section>
+        </section>
 
-                <!-- CSS Output -->
-                <div class="mdl-tabs__panel code-output" id="css-panel">
-                    <!--custom directive for css output code-->
-                    <css-output id="css-output"></css-output>
-                    <button class="btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#css-output">Copy CSS to clipboard</button>
-                </div>
-
-                <!-- JS Output -->
-                <div class="mdl-tabs__panel code-output" id="js-panel">
-                    <!--custom directive for javascript output code-->
+        <!-- Javascript Section Starts Here -->
+        <section class="mdl-cell mdl-cell--8-col code-output">
+            <section class="demo-card-wide mdl-card mdl-shadow--3dp">
+                <section class="mdl-card__title card-title">
+                    <h2 class="mdl-card__title-text">JAVASCRIPT</h2>
+                </section>
+                <section class="mdl-card__supporting-text overflow-on">
                     <js-output id="js-output"></js-output>
-                    <button class="btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#js-output">Copy JavaScript to clipboard</button>
-                </div>
+                </section>
+                <section class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <section class="mdl-card__menu">
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn" data-clipboard-action="copy" data-clipboard-target="#js-output">
+                                <i class="material-icons">content_copy</i>
+                            </button>
+                            <span class="mdl-tooltip" for="js-tooltip">Copy JS</span>
+                        </section>
+                    </button>
+                </section>
+            </section>
+        </section>
 
-            </div>
-        </div>
+        <!-- CSS Section Starts Here -->
+        <section class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet css-output">
+            <section class="demo-card-wide mdl-card mdl-shadow--3dp">
+                <section class="mdl-card__title card-title">
+                    <h2 class="mdl-card__title-text">CSS</h2>
+                </section>
+                <section class="mdl-card__supporting-text overflow-on-css">
+                    <css-output id="css-output"></css-output>
+                </section>
+                <section class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <section class="mdl-card__menu">
+                            <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect btn" data-clipboard-action="copy" data-clipboard-target="#css-output">
+                                <i class="material-icons">content_copy</i>
+                            </button>
+                            <span class="mdl-tooltip" for="css-tooltip">Copy CSS</span>
+                        </section>
+                    </button>
+                </section>
+            </section>
+        </section>
+
     </div>
-
-    <!-- More Cool Stuff Section -->
-    <div class="mdl-typography--text-center more-stuff mdl-shadow--2dp">
-        <div class="mdl-cell--12-col more-stuff-info">
-            More cool stuff @
-            <a href="http://dsdilpreet.github.io/">dsdilpreet.github.io</a>
-        </div>
-    </div>
-
-
-    <!-- footer starts -->
-    <footer class="mdl-mini-footer mdl-shadow--3dp">
-        <div class="mdl-mini-footer__left-section footer-sections footer-sec-1">
-            <div class="mdl-logo">
-                Developed by Dilpreet Singh
-            </div>
-        </div>
-        <div class="mdl-cell--middle footer-sections footer-sec-2">
-            <div style="width: 36px; margin: 0 auto 0; display: block; ">
-                <a href="/">
-                    <i class="material-icons mdl-logo logo">play_circle_filled</i>
-                </a>
-            </div>
-        </div>
-        <div class="mdl-mini-footer__right-section footer-sections footer-sec-3">
-            <a class="mdl-mini-footer__social-btn" href="https://twitter.com/dil_singh"><img src="img/twitter.png" /></a>
-            <a class="mdl-mini-footer__social-btn" href="http://nz.linkedin.com/in/dsingh94"><img src="img/linkedin.png" /></a>
-            <a class="mdl-mini-footer__social-btn" href="http://dsdilpreet.github.io/"><img src="img/github.png" /></a>
-        </div>
-
-    </footer>
-
 </div>
-<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
